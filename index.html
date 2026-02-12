@@ -2,235 +2,330 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Памяти Карелиной Мили Илларионовны</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Карелина Миля Илларионовна — память</title>
   <style>
+    /* ===== Светлая, тихая, строгая эстетика ===== */
     :root {
-      --bg: #f6f7f9;
+      --bg: #fafaf9;
       --card: #ffffff;
-      --muted: #6b7280;
-      --accent: #2f4f8f;
-      --maxw: 820px;
+      --text: #1c1c1e;
+      --muted: #6b6f76;
+      --light-border: #e8e8e8;
+      --accent: #3a5a78;
+      --maxw: 880px;
     }
-    body {
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      background: var(--bg);
-      color: #111;
+
+    * {
       margin: 0;
-      padding: 32px;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', 'Palatino', 'Palatino Linotype', serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 40px 20px;
       display: flex;
       justify-content: center;
+      line-height: 1.6;
+      font-weight: 300;
     }
+
     .wrap {
       width: 100%;
       max-width: var(--maxw);
     }
+
     .card {
       background: var(--card);
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(20, 24, 28, 0.08);
-      padding: 28px;
+      border-radius: 20px;
+      padding: 40px 36px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--light-border);
     }
+
+    /* ===== Шапка ===== */
     header {
       display: flex;
-      gap: 18px;
+      gap: 28px;
       align-items: center;
+      margin-bottom: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--light-border);
     }
+
     .avatar {
       width: 120px;
       height: 120px;
-      border-radius: 12px;
+      border-radius: 50%;
       overflow: hidden;
       flex: 0 0 120px;
-      background: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: #eceef0;
+      border: 1px solid #d4d8dd;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
+
     .avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      filter: grayscale(20%);
     }
+
     h1 {
       margin: 0;
-      font-size: 22px;
+      font-size: 28px;
+      font-weight: 350;
+      letter-spacing: -0.01em;
+      color: #2c3e4f;
     }
-    .sub {
+
+    .dates {
       color: var(--muted);
       margin-top: 6px;
-      font-size: 14px;
+      font-size: 16px;
+      font-style: italic;
+      border-bottom: 1px dashed #d0d7de;
+      display: inline-block;
+      padding-bottom: 4px;
     }
+
+    .tagline {
+      margin-top: 12px;
+      font-size: 15px;
+      color: #4a5b68;
+      font-style: normal;
+      letter-spacing: 0.3px;
+    }
+
+    /* ===== Биография ===== */
     .bio {
-      margin-top: 20px;
-      line-height: 1.6;
-      color: #222;
+      margin-bottom: 40px;
     }
+
+    .bio p {
+      font-size: 17px;
+      color: #2e3b45;
+      margin-bottom: 18px;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .bio p:first-child {
+      margin-top: 0;
+    }
+
+    /* ===== Видео и QR ===== */
     .media {
-      margin-top: 18px;
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
+      grid-template-columns: 1fr 280px;
+      gap: 28px;
+      align-items: start;
     }
+
+    .video-wrapper {
+      background: #0b0c0e;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #2e3b45;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+    }
+
     video {
       width: 100%;
-      border-radius: 8px;
-      background: #000;
+      display: block;
+      background: #0b0c0e;
     }
-    .controls {
-      margin-top: 18px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+
+    /* ===== QR-блок — строгий, почти тактичный ===== */
+    .qr-section {
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 24px 20px;
+      border: 1px solid #e2e6ea;
+      text-align: center;
     }
-    .btn {
-      background: var(--accent);
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 8px;
+
+    .qr-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #6c757d;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #dde2e6;
+      padding-bottom: 10px;
+    }
+
+    .qr-frame {
+      display: inline-block;
+      padding: 12px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      border: 1px solid #dfe5e9;
+      margin-bottom: 16px;
+    }
+
+    .qr-frame img {
+      display: block;
+      width: 140px;
+      height: 140px;
+    }
+
+    .qr-hint {
+      font-size: 13px;
+      color: #5e6f7d;
+      font-style: italic;
+      margin-top: 8px;
+      line-height: 1.5;
+      border-top: 1px solid #e9ecef;
+      padding-top: 16px;
+    }
+
+    .qr-hint a {
+      color: #3a5a78;
       text-decoration: none;
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      border: 0;
-      cursor: pointer;
+      border-bottom: 1px dotted #9aa9b5;
     }
-    .btn.secondary {
-      background: #e6e9ef;
-      color: #111;
+
+    .qr-hint a:hover {
+      border-bottom: 1px solid #2c4c6c;
     }
+
+    /* ===== Футер ===== */
     footer {
-      margin-top: 18px;
-      color: var(--muted);
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--light-border);
+      color: #7a858f;
       font-size: 13px;
-    }
-    .qr-wrap {
-      margin-top: 18px;
       display: flex;
-      gap: 12px;
+      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      font-style: italic;
     }
-    .small {
-      font-size: 13px;
-      color: var(--muted);
+
+    .memorial-sign {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #9aa4ae;
     }
-    @media (min-width: 720px) {
-      .media {
-        grid-template-columns: 1fr 300px;
-      }
-      video {
-        height: 320px;
-        object-fit: cover;
-      }
+
+    /* ===== Адаптация ===== */
+    @media (max-width: 720px) {
+      .card { padding: 28px 20px; }
+      header { flex-direction: column; text-align: center; }
+      .avatar { margin-bottom: 8px; }
+      .media { grid-template-columns: 1fr; }
+      h1 { font-size: 24px; }
+    }
+
+    /* Тихая цветовая гамма, ничего лишнего */
+    .quiet {
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card" id="card">
+    <div class="card">
+      
+      <!-- ШАПКА: фото, имя, годы -->
       <header>
         <div class="avatar">
-          <img id="photo" src="photo.jpg" alt="Фото">
+          <img id="photo" src="photo.jpg" alt="Фотография Мили Илларионовны">
         </div>
         <div>
           <h1 id="name">Карелина Миля Илларионовна</h1>
-          <div class="sub" id="dates">1938 — 2013</div>
-          <div class="small" id="tagline">Любимая мама, бабушка и друг</div>
+          <div class="dates" id="dates">1938 — 2013</div>
+          <div class="tagline" id="tagline">Любимая мама, бабушка и друг</div>
         </div>
       </header>
 
+      <!-- БИОГРАФИЯ:  -->
       <section class="bio" id="bio">
-        <p>Краткая биография: родилась в 1938 году. места жизни, род деятельности, важные события и тёплые воспоминания.</p>
+        <p>Родилась в 1938 году. Её жизнь пришлась на непростые годы, но она сохранила доброту, достоинство и умение радоваться простым вещам. Работала, растила детей, стала опорой для внуков. Её помнят как человека с тихим голосом, мудрым взглядом и открытым сердцем.</p>
       </section>
 
+      <!-- ВИДЕО И QR-КОД -->
       <section class="media">
-        <div>
-          <video id="video" controls playsinline>
+        <!-- Видео -->
+        <div class="video-wrapper">
+          <video id="video" controls playsinline preload="metadata">
             <source src="video.mp4" type="video/mp4">
             Ваш браузер не поддерживает видео.
           </video>
         </div>
 
-        <div>
-          <div class="qr-wrap">
-            <!-- QR-код из репозитория mem -->
-            <div class="small" style="display: inline-block; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; margin: 10px 0;">
-              <a href="https://qrcod.ru/" target="_blank">
-                <img src="https://github.com/levsergeevich324-prog/mem/raw/main/qr.svg" alt="QR-код" style="display: block; width: 120px; height: 120px;">
-              </a>
-            </div>
-            <div>
-              <button class="btn secondary" id="downloadZip">Скачать архив</button>
-            </div>
+        <div class="qr-section">
+          <div class="qr-label">страница памяти</div>
+          <div class="qr-frame">
+            <a href="https://qrcod.ru/" target="_blank">
+              <img src="https://github.com/levsergeevich324-prog/mem/raw/main/qr.svg" alt="QR-код для перехода на страницу">
+            </a>
           </div>
-
-          <div class="controls">
-            <button class="btn secondary" id="downloadPhoto">Скачать фото</button>
+          <div class="qr-hint">
+            <span class="small">Перейдите по QR‑коду,</span><br>
+            <span style="font-size: 12px;">чтобы открыть страницу памяти</span>
           </div>
         </div>
       </section>
 
+      <!-- ФУТЕР: только скромная подпись -->
       <footer>
-        <div>Страница создана в память.</div>
+        <span class="memorial-sign">вечная память</span>
+        <span>Страница создана близкими</span>
       </footer>
+
     </div>
   </div>
 
+  <!-- НЕБОЛЬШОЙ СКРИПТ: подставляет данные и загружает видео -->
   <script>
-    const defaults = {
-      name: "Карелина Миля Илларионовна",
-      dates: "1938 — 2013",
-      tagline: "Любимая мама, бабушка и друг",
-      bio: "Родилась в 1938 году. Здесь добавим места жизни, род деятельности, важные события и тёплые воспоминания.",
-      photo: "photo.jpg",
-      video: "video.mp4"
-    };
+    (function() {
+      // Данные по умолчанию — с уважением, без лишнего шума
+      const defaults = {
+        name: "Карелина Миля Илларионовна",
+        dates: "1938 — 2013",
+        tagline: "Любимая мама, бабушка и друг",
+        bio: "<p>Родилась в 1938 году. Её жизнь пришлась на непростые годы, но она сохранила доброту, достоинство и умение радоваться простым вещам. Работала, растила детей, стала опорой для внуков. Её помнят как человека с тихим голосом, мудрым взглядом и открытым сердцем.</p><p>Здесь могут быть подробности: место работы, увлечения, важные события. Главное — память, которую мы храним.</p>",
+        photo: "photo.jpg",
+        video: "video.mp4"
+      };
 
-    document.getElementById('name').textContent = defaults.name;
-    document.getElementById('dates').textContent = defaults.dates;
-    document.getElementById('tagline').textContent = defaults.tagline;
-    document.getElementById('bio').innerHTML = "<p>" + defaults.bio + "</p>";
-    document.getElementById('photo').src = defaults.photo;
-    document.getElementById('video').querySelector('source').src = defaults.video;
-    document.getElementById('video').load();
+      // Устанавливаем значения
+      document.getElementById('name').textContent = defaults.name;
+      document.getElementById('dates').textContent = defaults.dates;
+      document.getElementById('tagline').textContent = defaults.tagline;
+      document.getElementById('bio').innerHTML = defaults.bio;
+      document.getElementById('photo').src = defaults.photo;
+      
+      const videoEl = document.getElementById('video');
+      const sourceEl = videoEl.querySelector('source');
+      if (sourceEl) {
+        sourceEl.src = defaults.video;
+        videoEl.load();
+      }
 
-    // Скачать фото
-    document.getElementById('downloadPhoto').addEventListener('click', () => {
-      const a = document.createElement('a');
-      a.href = document.getElementById('photo').src;
-      a.download = 'photo.jpg';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    });
-
-    // Скачать архив (index.html)
-    document.getElementById('downloadZip').addEventListener('click', async () => {
-      const html = document.documentElement.outerHTML;
-      const blob = new Blob([html], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'index.html';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-      alert('Скачан файл index.html. Добавьте фото и видео в ту же папку перед загрузкой на GitHub.');
-    });
-
-    function applyFromQuery() {
-      const params = new URLSearchParams(location.search);
-      if (params.get('name')) document.getElementById('name').textContent = params.get('name');
-      if (params.get('dates')) document.getElementById('dates').textContent = params.get('dates');
-      if (params.get('tagline')) document.getElementById('tagline').textContent = params.get('tagline');
-      if (params.get('bio')) document.getElementById('bio').innerHTML = "<p>" + params.get('bio') + "</p>";
-      if (params.get('photo')) { document.getElementById('photo').src = params.get('photo'); }
-      if (params.get('video')) { document.getElementById('video').querySelector('source').src = params.get('video'); document.getElementById('video').load(); }
-    }
-    applyFromQuery();
+      // Если есть параметры в URL — можно их применить (для будущих версий)
+      function applyFromQuery() {
+        const params = new URLSearchParams(location.search);
+        if (params.get('name')) document.getElementById('name').textContent = params.get('name');
+        if (params.get('dates')) document.getElementById('dates').textContent = params.get('dates');
+        if (params.get('tagline')) document.getElementById('tagline').textContent = params.get('tagline');
+        if (params.get('bio')) document.getElementById('bio').innerHTML = '<p>' + params.get('bio').replace(/\n/g, '</p><p>') + '</p>';
+        if (params.get('photo')) { document.getElementById('photo').src = params.get('photo'); }
+        if (params.get('video')) { 
+          const s = videoEl.querySelector('source');
+          if (s) { s.src = params.get('video'); videoEl.load(); }
+        }
+      }
+      applyFromQuery();
+    })();
   </script>
 </body>
 </html>
