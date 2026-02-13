@@ -182,7 +182,7 @@ h1 {
   max-height: 400px;
 }
 
-/* ===== QR-СЕКЦИЯ ===== */
+/* ===== QR-СЕКЦИЯ С ЦВЕТНЫМ НАЛОЖЕНИЕМ (ВАРИАНТ 5) ===== */
 .qr-section {
   background: rgba(20, 28, 36, 0.75);
   backdrop-filter: blur(4px);
@@ -206,15 +206,18 @@ h1 {
   font-weight: 500;
 }
 
+/* Контейнер для QR-кода с цветным наложением */
 .qr-frame {
+  position: relative;
   display: inline-block;
   padding: 8px;
-  background: rgba(25, 35, 50, 0.85); /* Темный фон */
+  background: rgba(25, 35, 50, 0.85);
   border-radius: 16px;
   border: 1px solid rgba(100, 150, 200, 0.3);
   margin-bottom: 15px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.4);
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .qr-frame:hover {
@@ -229,23 +232,34 @@ h1 {
   width: 130px;
   height: 130px;
   max-width: 100%;
-  
-  /* ИЗМЕНЕНИЕ ЦВЕТА QR-КОДА */
-  filter: brightness(0.9) sepia(0.3) hue-rotate(180deg) saturate(1.5);
-  
-  /* Альтернативные варианты цветов (закомментированы) */
-  /* filter: brightness(0.8) sepia(0.5) hue-rotate(200deg) saturate(2); */ /* Синий оттенок */
-  /* filter: brightness(0.9) sepia(0.4) hue-rotate(300deg) saturate(1.3); */ /* Фиолетовый */
-  /* filter: brightness(0.85) sepia(0.6) hue-rotate(350deg) saturate(1.4); */ /* Золотистый */
-  /* filter: brightness(0.8) sepia(0.7) hue-rotate(250deg) saturate(1.2); */ /* Бирюзовый */
-  
+  position: relative;
+  z-index: 1;
   opacity: 0.95;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .qr-frame:hover img {
   opacity: 1;
-  filter: brightness(1) sepia(0.2) hue-rotate(180deg) saturate(1.6); /* Чуть ярче при наведении */
+}
+
+/* Цветное наложение поверх QR-кода */
+.qr-frame::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(100, 150, 255, 0.25); /* Голубоватое наложение */
+  mix-blend-mode: color;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.qr-frame:hover::after {
+  background: rgba(120, 170, 255, 0.3); /* Чуть ярче при наведении */
 }
 
 .qr-hint {
@@ -755,4 +769,9 @@ footer {
   .coordinates-section:hover {
     background: rgba(20, 35, 50, 0.55);
   }
+  
+  .qr-frame:hover {
+    transform: none;
+  }
 }
+ 
