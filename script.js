@@ -250,7 +250,90 @@ function enableMobilePlayback() {
     document.addEventListener('click', enablePlayback);
   }
 }
+// ===== МЕРЦАНИЕ ДАТЫ С ЭФФЕКТОМ ЗВЕЗДЫ =====
+function createDateAnimation() {
+  const datesElement = document.getElementById('dates');
+  if (!datesElement) return;
+  
+  let isOriginal = true;
+  const originalText = datesElement.textContent;
+  
+  // Создаем дополнительный элемент для эффекта
+  datesElement.style.position = 'relative';
+  datesElement.style.cursor = 'pointer';
+  
+  // Добавляем тултип с объяснением
+  const tooltip = document.createElement('span');
+  tooltip.className = 'date-tooltip';
+  tooltip.textContent = '1935 - настоящий год рождения';
+  tooltip.style.cssText = `
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20, 30, 45, 0.9);
+    color: #d8ecff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'Cormorant Garamond', serif;
+    white-space: nowrap;
+    border: 1px solid rgba(170, 200, 230, 0.3);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 20;
+    letter-spacing: 1px;
+  `;
+  
+  datesElement.appendChild(tooltip);
+  
+  // Показываем тултип при наведении
+  datesElement.addEventListener('mouseenter', () => {
+    tooltip.style.opacity = '1';
+  });
+  
+  datesElement.addEventListener('mouseleave', () => {
+    tooltip.style.opacity = '0';
+  });
+  
+  // Функция смены даты
+  function toggleDate() {
+    // Эффект затухания
+    datesElement.style.opacity = '0.5';
+    datesElement.style.transform = 'scale(0.98)';
+    
+    setTimeout(() => {
+      if (isOriginal) {
+        datesElement.textContent = originalText.replace('1938', '1935');
+        datesElement.style.borderBottomColor = '#aac8e0'; // Меняем цвет подчеркивания
+      } else {
+        datesElement.textContent = originalText;
+        datesElement.style.borderBottomColor = '#6a85a0'; // Возвращаем исходный цвет
+      }
+      isOriginal = !isOriginal;
+      
+      // Возвращаем нормальный вид
+      datesElement.style.opacity = '1';
+      datesElement.style.transform = 'scale(1)';
+    }, 300);
+  }
+  
+  // Запускаем цикл смены
+  setInterval(toggleDate, 2500);
+  
+  // Добавляем плавные переходы
+  datesElement.style.transition = 'opacity 0.3s ease, transform 0.3s ease, border-bottom-color 0.3s ease';
+}
 
+// Запуск
+document.addEventListener('DOMContentLoaded', function() {
+  // Существующий код инициализации...
+  
+  // Запускаем анимацию даты
+  setTimeout(createDateAnimation, 1500);
+});
 // Запускаем для мобильных устройств
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
   document.addEventListener('DOMContentLoaded', enableMobilePlayback);
