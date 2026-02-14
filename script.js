@@ -1,4 +1,3 @@
-
 // ===== ГЕНЕРАЦИЯ ЗВЁЗДНОГО НЕБА =====
 function createStars() {
   const starsContainer = document.getElementById('stars');
@@ -54,7 +53,7 @@ function createStars() {
 // Данные
 const defaults = {
   name: "Карелина Миля Илларионовна",
-  dates: "1936 — 2013",
+  dates: "1935 — 2013",  // Изменено на 1935
   bio: "<p>Родилась в 1935 году. Её жизнь пришлась на непростые годы, но она сохранила доброту, достоинство и умение радоваться простым вещам. Работала, растила детей, стала опорой для внуков, буквально жила ради них работая даже на пенсии. Её помнят как человека с тихим голосом, мудрым взглядом и открытым сердцем.</p>",
   photo: "photo.jpg",
   video: "https://github.com/levsergeevich324-prog/mem/raw/main/video.mp4"
@@ -105,9 +104,9 @@ function setContent() {
   }
 }
 
-// ===== МЕРЦАНИЕ ДАТЫ (1938 ⇄ 1935) =====
+// ===== МЕРЦАНИЕ ДАТЫ (1935 ⇄ 1936) =====
 function createDateAnimation() {
-  console.log('Запуск анимации даты'); // Для отладки
+  console.log('Запуск анимации даты');
   
   const datesElement = document.getElementById('dates');
   if (!datesElement) {
@@ -117,23 +116,32 @@ function createDateAnimation() {
   
   console.log('Элемент dates найден:', datesElement.textContent);
   
-  let isOriginal = true;
-  const originalText = datesElement.textContent;
+  // Сохраняем оригинальный текст
+  let originalText = datesElement.textContent;
   
-  // Проверяем, что текст содержит 1938
-  if (!originalText.includes('1936')) {
-    console.log('В тексте нет 1936');
-    return;
+  // Проверяем, что текст содержит 1935
+  if (!originalText.includes('1935')) {
+    console.log('В тексте нет 1935, пробуем заменить принудительно');
+    // Если вдруг там другое значение, устанавливаем принудительно
+    datesElement.textContent = "1935 — 2013";
+    originalText = "1935 — 2013";
   }
   
+  let isOriginal = true; // true = 1935, false = 1936
+  
   // Добавляем стили для элемента
-  datesElement.style.transition = 'opacity 0.3s ease, transform 0.3s ease, color 0.3s ease';
+  datesElement.style.transition = 'opacity 0.3s ease, transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease';
   datesElement.style.cursor = 'pointer';
+  datesElement.style.position = 'relative';
+  
+  // Удаляем старый тултип, если есть
+  const oldTooltip = document.querySelector('.date-tooltip');
+  if (oldTooltip) oldTooltip.remove();
   
   // Создаем тултип
   const tooltip = document.createElement('span');
   tooltip.className = 'date-tooltip';
-  tooltip.textContent = '1935 - настоящий год рождения';
+  tooltip.textContent = '1936 - год в документах';
   tooltip.style.cssText = `
     position: absolute;
     bottom: 100%;
@@ -154,10 +162,9 @@ function createDateAnimation() {
     z-index: 100;
     letter-spacing: 1px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    margin-bottom: 5px;
   `;
   
-  // Устанавливаем относительное позиционирование для родителя
-  datesElement.style.position = 'relative';
   datesElement.appendChild(tooltip);
   
   // Показываем тултип при наведении
@@ -172,30 +179,49 @@ function createDateAnimation() {
   // Функция смены даты
   function toggleDate() {
     // Эффект затухания
-    datesElement.style.opacity = '0.5';
-    datesElement.style.transform = 'scale(0.98)';
-    datesElement.style.color = '#aac8e0';
+    datesElement.style.opacity = '0.6';
+    datesElement.style.transform = 'scale(0.97)';
+    datesElement.style.textShadow = '0 0 8px rgba(170, 200, 255, 0.8)';
     
     setTimeout(() => {
       if (isOriginal) {
-        datesElement.textContent = originalText.replace('1936', '1935');
-        console.log('Сменили на 1935');
-      } else {
-        datesElement.textContent = originalText;
+        // Меняем 1935 на 1936
+        datesElement.textContent = originalText.replace('1935', '1936');
         console.log('Сменили на 1936');
+      } else {
+        // Возвращаем 1935
+        datesElement.textContent = originalText;
+        console.log('Сменили на 1935');
       }
       isOriginal = !isOriginal;
       
       // Возвращаем нормальный вид
       datesElement.style.opacity = '1';
       datesElement.style.transform = 'scale(1)';
-      datesElement.style.color = '#c8d9ec';
+      datesElement.style.textShadow = 'none';
     }, 300);
   }
   
+  // Очищаем предыдущий интервал, если был
+  if (window.dateAnimationInterval) {
+    clearInterval(window.dateAnimationInterval);
+  }
+  
   // Запускаем интервал
-  console.log('Запускаем интервал смены даты');
-  setInterval(toggleDate, 2500);
+  console.log('Запускаем интервал смены даты (каждые 2.5 секунды)');
+  window.dateAnimationInterval = setInterval(toggleDate, 2500);
+  
+  // Добавляем возможность остановить при клике
+  datesElement.addEventListener('click', () => {
+    if (window.dateAnimationInterval) {
+      clearInterval(window.dateAnimationInterval);
+      window.dateAnimationInterval = null;
+      tooltip.textContent = 'Анимация остановлена';
+      setTimeout(() => {
+        tooltip.textContent = '1936 - год в документах';
+      }, 2000);
+    }
+  });
 }
 
 // ===== ОБРАБОТЧИК СОБЫТИЙ =====
@@ -209,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
   createStars();
   
   // Запускаем анимацию даты с задержкой
-  setTimeout(createDateAnimation, 500);
+  setTimeout(createDateAnimation, 1000);
 });
 
 // Обработчик resize для звезд
@@ -220,3 +246,13 @@ window.addEventListener('resize', function() {
     createStars();
   }, 200);
 });
+
+// На случай если скрипт загружается после DOM
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  setTimeout(() => {
+    console.log('Скрипт загружен после DOM, запускаем...');
+    setContent();
+    createStars();
+    setTimeout(createDateAnimation, 1000);
+  }, 100);
+}
