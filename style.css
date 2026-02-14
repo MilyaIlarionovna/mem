@@ -162,8 +162,7 @@ h1 {
   align-items: start;
   margin-bottom: 45px;
 }
-
-/* ===== ВИДЕО НА ВЕСЬ ЭКРАН БЕЗ ПОЛОС ===== */
+/* ===== ВИДЕО БЕЗ ОБРЕЗКИ (АДАПТИВНОЕ) ===== */
 .video-wrapper {
   background: #000000;
   border-radius: 16px;
@@ -171,40 +170,31 @@ h1 {
   border: 1px solid #3e5266;
   box-shadow: 0 10px 25px rgba(0,0,0,0.6);
   width: 100%;
-  height: 0;
-  padding-bottom: 56.25%; /* 16:9 соотношение (9/16 = 0.5625) */
-  position: relative;
+  margin: 0 auto;
 }
 
 .video-wrapper video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: auto;
-  height: auto;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -60%);
-  display: block;
-  background: #000000;
-  object-fit: cover;
-}
-
-/* Альтернативный вариант если видео вертикальное */
-.video-wrapper.portrait video {
   width: 100%;
   height: auto;
-  min-width: 100%;
-  min-height: 100%;
+  display: block;
+  background: #000000;
+  max-height: 500px; /* Максимальная высота */
 }
 
-/* Альтернативный вариант если видео горизонтальное */
-.video-wrapper.landscape video {
-  width: auto;
-  height: 100%;
-  min-width: 100%;
-  min-height: 100%;
+/* Для мобильных */
+@media screen and (max-width: 768px) {
+  .video-wrapper video {
+    max-height: 400px;
+  }
 }
+
+/* Для маленьких телефонов */
+@media screen and (max-width: 480px) {
+  .video-wrapper video {
+    max-height: 300px;
+  }
+}
+
 /* ===== QR-СЕКЦИЯ ===== */
 .qr-section {
   background: rgba(20, 28, 36, 0.75);
