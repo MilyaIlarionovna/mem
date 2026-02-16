@@ -55,9 +55,13 @@
         opacity: 0;
         background: radial-gradient(circle at center, rgba(255, 255, 255, 0) 0%, transparent 100%);
       }
-      50% { 
-        opacity: 0.5;
-        background: radial-gradient(circle at center, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+      30% { 
+        opacity: 0.3;
+        background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, transparent 80%);
+      }
+      60% { 
+        opacity: 0.6;
+        background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 0%, transparent 60%);
       }
       100% { 
         opacity: 1;
@@ -101,6 +105,7 @@
 
     html {
       font-size: 16px;
+      scroll-behavior: smooth;
     }
 
     body {
@@ -168,12 +173,12 @@
       z-index: 300;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 2s ease;
+      transition: opacity 0.5s ease;
     }
 
     .white-overlay.active {
       opacity: 1;
-      animation: whiteOut 3s ease-in-out forwards;
+      animation: whiteOut 5s ease-in-out forwards;
     }
 
     /* ШАПКА (видна при заходе) */
@@ -185,7 +190,7 @@
       flex-wrap: wrap;
       gap: 15px;
       opacity: 1;
-      transition: opacity 1s ease;
+      transition: opacity 2s ease;
     }
 
     .header-top.hidden {
@@ -332,7 +337,7 @@
       border-bottom: 1px solid rgba(200, 215, 230, 0.15);
       flex-wrap: wrap;
       opacity: 1;
-      transition: opacity 1s ease;
+      transition: opacity 2s ease;
     }
 
     .main-header.hidden {
@@ -432,7 +437,7 @@
       border-radius: 40px;
       display: inline-block;
       border: 1px solid #4a5c6e;
-      transition: opacity 1s ease;
+      transition: opacity 2s ease;
     }
 
     .days-counter.hidden {
@@ -451,7 +456,7 @@
     .hidden-content {
       opacity: 0;
       visibility: hidden;
-      transition: opacity 1s ease, visibility 1s ease;
+      transition: opacity 2s ease, visibility 2s ease;
     }
 
     .hidden-content.visible {
@@ -464,19 +469,20 @@
     .hidden-content .bio,
     .hidden-content .info-row,
     .hidden-content footer {
-      animation: fadeInUp 1s ease forwards;
+      animation: fadeInUp 1.5s ease forwards;
       opacity: 0;
     }
 
-    .hidden-content.visible .timeline-section { animation-delay: 0.2s; }
-    .hidden-content.visible .video-section { animation-delay: 0.4s; }
-    .hidden-content.visible .bio { animation-delay: 0.6s; }
-    .hidden-content.visible .info-row { animation-delay: 0.8s; }
-    .hidden-content.visible footer { animation-delay: 1s; }
+    .hidden-content.visible .timeline-section { animation-delay: 0.3s; }
+    .hidden-content.visible .video-section { animation-delay: 0.6s; }
+    .hidden-content.visible .bio { animation-delay: 0.9s; }
+    .hidden-content.visible .info-row { animation-delay: 1.2s; }
+    .hidden-content.visible footer { animation-delay: 1.5s; }
 
     /* ХРОНОЛОГИЯ ЖИЗНИ */
     .timeline-section {
       margin: 50px 0 40px;
+      scroll-margin-top: 30px;
     }
 
     .timeline-title {
@@ -567,6 +573,7 @@
     /* ВИДЕО */
     .video-section {
       margin: 50px 0;
+      scroll-margin-top: 30px;
     }
 
     .video-wrapper {
@@ -594,6 +601,7 @@
       padding: 30px;
       border-radius: 20px;
       border-left: 3px solid #ffd700;
+      scroll-margin-top: 30px;
     }
 
     .bio p {
@@ -613,6 +621,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 30px;
       margin: 50px 0;
+      scroll-margin-top: 30px;
     }
 
     /* КООРДИНАТЫ */
@@ -752,6 +761,7 @@
       margin-top: 50px;
       padding-top: 30px;
       border-top: 2px solid #c09b5e;
+      scroll-margin-top: 30px;
     }
 
     .memorial-message {
@@ -829,7 +839,7 @@
   <div class="white-overlay" id="whiteOverlay"></div>
 
   <div class="wrap">
-<!--    <div class="card"> -->
+    <div class="card">
       
       <!-- ШАПКА С КНОПКОЙ И СЧЕТЧИКОМ (видна при заходе) -->
       <div class="header-top" id="headerTop">
@@ -866,7 +876,7 @@
       <div class="hidden-content" id="hiddenContent">
         
         <!-- ХРОНОЛОГИЯ ЖИЗНИ -->
-        <section class="timeline-section">
+        <section class="timeline-section" id="timeline">
           <h2 class="timeline-title">Хронология жизни</h2>
           <div class="timeline">
             <div class="timeline-item">
@@ -936,7 +946,7 @@
         </section>
 
         <!-- ВИДЕО -->
-        <section class="video-section">
+        <section class="video-section" id="video">
           <div class="video-wrapper">
             <video id="video" 
                    controls 
@@ -957,7 +967,7 @@
         </section>
 
         <!-- КООРДИНАТЫ И QR В ОДНОМ РЯДУ -->
-        <div class="info-row">
+        <div class="info-row" id="info">
           <!-- КООРДИНАТЫ МОГИЛЫ -->
           <section class="coordinates-section"> 
             <div class="coordinates-icon">🕊️</div>
@@ -991,7 +1001,7 @@
         </div>
 
         <!-- ПОДВАЛ С ПАМЯТНЫМИ СЛОВАМИ -->
-        <footer>
+        <footer id="footer">
           <div class="memorial-message">
             <p class="message-text">"Когда уходят хорошие люди, на небе зажигается новая звезда. Теперь их стало больше, а нам светлее..."</p>
           </div>
@@ -1136,6 +1146,20 @@
       type();
     }
 
+    // ===== ФУНКЦИЯ ПЛАВНОГО СКРОЛЛА =====
+    function smoothScrollToTimeline() {
+      const timelineSection = document.getElementById('timeline');
+      if (timelineSection) {
+        setTimeout(() => {
+          timelineSection.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start',
+            inline: 'nearest'
+          });
+        }, 2100); // Скролл через 2.1 секунды после появления контента
+      }
+    }
+
     // ===== СЧЕТЧИК ДНЕЙ =====
     function updateDaysCounter() {
       const daysElement = document.getElementById('daysCount');
@@ -1207,17 +1231,17 @@
           navigator.vibrate(50);
         }
         
-        // 1. Всё исчезает (кроме звезд)
+        // 1. Всё исчезает (кроме звезд) - увеличено до 3 секунд
         headerTop.classList.add('hidden');
         mainHeader.classList.add('hidden');
         daysCounter.classList.add('hidden');
         
-        // 2. Забеливание
+        // 2. Забеливание начинается через 3 секунды и длится 5 секунд
         setTimeout(() => {
           whiteOverlay.classList.add('active');
-        }, 1000);
+        }, 3000);
         
-        // 3. Появление остального контента
+        // 3. Появление остального контента через 8 секунд (3+5)
         setTimeout(() => {
           whiteOverlay.classList.remove('active');
           candleEffect.classList.remove('active');
@@ -1227,7 +1251,11 @@
           
           // Запускаем печать текста
           typeWriter();
-        }, 4000);
+          
+          // Запускаем плавный скролл к хронологии
+          smoothScrollToTimeline();
+          
+        }, 8000);
       });
       
       // Двойной клик для сброса
