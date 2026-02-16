@@ -234,7 +234,7 @@
     /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
     .wrap {
       width: 100%;
-      max-width: 1000px;
+      max-width: 1200px;
       position: relative;
       z-index: 20;
       margin: 20px;
@@ -266,13 +266,13 @@
     }
 
     .avatar {
-      width: 120px;
-      height: 120px;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       overflow: hidden;
-      flex: 0 0 120px;
-      border: 2px solid rgba(230, 240, 250, 0.3);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      flex: 0 0 150px;
+      border: 3px solid rgba(255, 215, 150, 0.5);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
     }
 
     .avatar img {
@@ -280,7 +280,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: grayscale(30%) brightness(0.95);
+      filter: grayscale(20%) brightness(0.98);
     }
 
     .header-text {
@@ -291,7 +291,7 @@
     h1 {
       margin: 0;
       font-family: 'Playfair Display', serif;
-      font-size: clamp(24px, 4vw, 32px);
+      font-size: clamp(28px, 4vw, 36px);
       font-weight: 500;
       color: #ffffff;
       text-shadow: 0 2px 8px rgba(0,0,0,0.6);
@@ -300,21 +300,21 @@
 
     .dates {
       font-family: 'EB Garamond', serif;
-      color: #c8d9ec;
-      margin-top: 10px;
-      font-size: clamp(16px, 3vw, 18px);
+      color: #ffd700;
+      margin-top: 12px;
+      font-size: clamp(18px, 3vw, 22px);
       font-style: italic;
-      border-bottom: 1px dashed #6a85a0;
+      border-bottom: 2px dashed #c09b5e;
       display: inline-block;
-      padding-bottom: 6px;
+      padding-bottom: 8px;
       position: relative;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
     .dates:hover {
-      color: #e6f0ff;
-      border-bottom-color: #aac8e0;
+      color: #fff0b5;
+      border-bottom-color: #e6b87e;
     }
 
     /* Тултип для даты */
@@ -324,12 +324,12 @@
       left: 50%;
       transform: translateX(-50%) translateY(-5px);
       background: rgba(20, 30, 45, 0.95);
-      color: #d8ecff;
+      color: #ffd700;
       padding: 8px 16px;
       border-radius: 24px;
       font-size: 14px;
       white-space: nowrap;
-      border: 1px solid rgba(170, 200, 230, 0.4);
+      border: 1px solid #c09b5e;
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       opacity: 0;
@@ -338,7 +338,6 @@
       pointer-events: none;
       z-index: 100;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      font-family: 'Cormorant Garamond', serif;
     }
 
     .dates:hover .date-tooltip {
@@ -347,34 +346,148 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    /* Счетчик дней */
+    .days-counter {
+      margin-top: 15px;
+      font-family: 'EB Garamond', serif;
+      font-size: 18px;
+      color: #c8d9ec;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 8px 18px;
+      border-radius: 40px;
+      display: inline-block;
+      border: 1px solid #4a5c6e;
+    }
+
+    .days-number {
+      color: #ffb347;
+      font-weight: 600;
+      font-size: 22px;
+      margin: 0 5px;
+    }
+
     /* БИОГРАФИЯ */
     .bio {
       margin-bottom: 40px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 25px;
+      border-radius: 20px;
     }
 
     .bio p {
-      font-size: clamp(16px, 2.5vw, 18px);
+      font-size: clamp(16px, 2.2vw, 18px);
       color: #ecf0f5;
       margin-bottom: 15px;
       text-align: left;
-      line-height: 1.7;
+      line-height: 1.8;
       text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+      white-space: pre-line;
+    }
+
+    /* ===== ХРОНОЛОГИЯ ЖИЗНИ ===== */
+    .timeline-section {
+      margin: 50px 0 40px;
+    }
+
+    .timeline-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: #ffd700;
+      text-align: center;
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .timeline {
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, #ffd700, #c09b5e, #6a5a4a);
+      border-radius: 4px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .timeline-item:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-content {
+      width: 45%;
+      background: rgba(30, 35, 45, 0.7);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid #c09b5e;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .timeline-content:hover {
+      transform: scale(1.02);
+      border-color: #ffd700;
+      box-shadow: 0 5px 30px rgba(255, 215, 0, 0.2);
+    }
+
+    .timeline-year {
+      font-family: 'EB Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #ffd700;
+      margin-bottom: 10px;
+    }
+
+    .timeline-text {
+      font-size: 18px;
+      color: #ecf0f5;
+      line-height: 1.6;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: #ffd700;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 20px #ffd700;
+      z-index: 10;
     }
 
     /* ВИДЕО И QR */
     .media {
       display: grid;
-      grid-template-columns: 1fr 280px;
-      gap: 25px;
-      margin-bottom: 45px;
+      grid-template-columns: 1fr 350px;
+      gap: 30px;
+      margin: 40px 0;
     }
 
     .video-wrapper {
       background: #000000;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid #3e5266;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      border: 2px solid #c09b5e;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
       width: 100%;
     }
 
@@ -382,181 +495,195 @@
       width: 100%;
       height: auto;
       display: block;
-      max-height: 400px;
+      max-height: 450px;
     }
 
     .qr-section {
-      background: rgba(20, 28, 36, 0.75);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      background: rgba(20, 28, 36, 0.8);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       border-radius: 20px;
-      padding: 20px;
+      padding: 25px;
       text-align: center;
+      border: 2px solid #c09b5e;
+    }
+
+    .qr-label {
+      font-family: 'Great Vibes', cursive;
+      font-size: 24px;
+      color: #ffd700;
+      margin-bottom: 15px;
     }
 
     .qr-frame {
       display: inline-block;
-      padding: 8px;
-      background: rgba(25, 35, 50, 0.85);
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 16px;
-      border: 1px solid rgba(100, 150, 200, 0.3);
+      border: 1px solid #c09b5e;
     }
 
     .qr-frame img {
       display: block;
-      width: 290px;
-      height: 290px;
+      width: 250px;
+      height: 250px;
       max-width: 100%;
       opacity: 0.95;
     }
 
     /* КООРДИНАТЫ */
     .coordinates-section {
-      background: rgba(20, 35, 50, 0.55);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      background: rgba(20, 35, 50, 0.6);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       border-radius: 24px;
-      padding: 25px 30px;
-      margin-bottom: 30px;
+      padding: 30px;
+      margin: 40px 0;
       display: flex;
       align-items: center;
-      gap: 25px;
-      border: 1px solid rgba(190, 210, 230, 0.2);
+      gap: 30px;
+      border: 2px solid #c09b5e;
       flex-wrap: wrap;
     }
 
     .coordinates-icon {
-      font-size: 40px;
+      font-size: 50px;
       animation: float 4s ease-in-out infinite;
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+      50% { transform: translateY(-8px); }
     }
 
     .coordinates-content {
       flex: 1;
-      min-width: 200px;
+      min-width: 250px;
     }
 
     .coordinates-title {
-      font-family: 'EB Garamond', serif;
-      margin: 0 0 8px 0;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      color: #d8ecff;
+      font-family: 'Great Vibes', cursive;
+      font-size: 28px;
+      color: #ffd700;
+      margin-bottom: 15px;
     }
 
     .coordinates-display {
-      background: rgba(10, 15, 22, 0.7);
-      padding: 12px 16px;
-      border-radius: 40px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px 20px;
+      border-radius: 50px;
       display: inline-flex;
-      margin-bottom: 12px;
-      border: 1px solid rgba(200, 225, 250, 0.2);
+      margin-bottom: 15px;
+      border: 1px solid #c09b5e;
     }
 
     .coord {
       font-family: 'EB Garamond', monospace;
-      font-size: clamp(16px, 3vw, 20px);
+      font-size: 22px;
       color: #ffffff;
-      letter-spacing: 1px;
-      text-shadow: 0 0 8px rgba(150, 200, 255, 0.5);
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #ffd700;
     }
 
     .coord-sep {
-      font-size: clamp(18px, 3.5vw, 24px);
-      color: #9bc3eb;
-      margin: 0 5px;
-    }
-
-    .coordinates-caption {
-      margin: 8px 0 15px 0;
+      font-size: 26px;
+      color: #ffd700;
+      margin: 0 8px;
     }
 
     .caption-text {
       font-family: 'Great Vibes', cursive;
-      font-size: 22px;
-      color: #cde1f2;
-      border-bottom: 1px dotted #6d8eaa;
-      padding-bottom: 4px;
+      font-size: 24px;
+      color: #e6d5b8;
+      margin: 10px 0 15px;
     }
 
     .coordinates-button {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(60, 90, 120, 0.5);
-      color: #ffffff;
+      gap: 10px;
+      background: rgba(255, 215, 0, 0.2);
+      color: #ffd700;
       text-decoration: none;
-      padding: 10px 20px;
+      padding: 12px 25px;
       border-radius: 40px;
-      font-size: 16px;
-      border: 1px solid rgba(200, 225, 250, 0.3);
-      margin-top: 10px;
+      font-size: 18px;
+      border: 1px solid #c09b5e;
+      transition: all 0.3s ease;
     }
 
     .coordinates-button:hover {
-      background: rgba(80, 120, 160, 0.7);
-      transform: translateY(-2px);
+      background: rgba(255, 215, 0, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
     }
 
     /* ПОДВАЛ */
     footer {
-      margin-top: 30px;
-      padding-top: 25px;
-      border-top: 1px solid rgba(200, 220, 240, 0.1);
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 2px solid #c09b5e;
     }
 
     .memorial-message {
       text-align: center;
-      padding: 18px 20px;
-      background: rgba(70, 90, 110, 0.2);
-      border-radius: 16px;
-      border-left: 3px solid #aac8e0;
-      border-right: 3px solid #aac8e0;
-      margin-bottom: 20px;
+      padding: 25px;
+      background: rgba(70, 50, 30, 0.3);
+      border-radius: 20px;
+      border-left: 4px solid #ffd700;
+      border-right: 4px solid #ffd700;
+      margin-bottom: 25px;
     }
 
     .message-text {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(22px, 4vw, 28px);
-      color: #ffffff;
-      line-height: 1.4;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      font-size: clamp(26px, 4vw, 32px);
+      color: #ffd700;
+      line-height: 1.5;
+      text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
     }
 
     .footer-bottom {
       display: flex;
       justify-content: space-between;
       color: #b4cce3;
-      font-size: 14px;
+      font-size: 16px;
       font-style: italic;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 15px;
     }
 
     .memorial-sign {
-      font-size: 12px;
+      font-size: 14px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #c8def5;
+      color: #c09b5e;
     }
 
     /* АДАПТАЦИЯ */
+    @media screen and (max-width: 900px) {
+      .timeline::before { left: 30px; }
+      .timeline-item, .timeline-item:nth-child(odd) {
+        flex-direction: row;
+      }
+      .timeline-content { width: 80%; margin-left: 60px; }
+      .timeline-dot { left: 30px; }
+    }
+
     @media screen and (max-width: 750px) {
       .media { grid-template-columns: 1fr; }
       .candle-counter { top: 10px; right: 10px; padding: 8px 15px; }
+      .qr-frame img { width: 200px; height: 200px; }
     }
 
     @media screen and (max-width: 480px) {
       .card { padding: 20px 15px; }
       header { flex-direction: column; text-align: center; }
+      .avatar { width: 130px; height: 130px; flex: 0 0 130px; }
       .candle-button { padding: 12px 25px; }
-      .candle-button-text { font-size: 16px; }
-      .date-tooltip { font-size: 12px; padding: 6px 12px; white-space: normal; width: 200px; text-align: center; }
+      .timeline-content { width: 85%; margin-left: 50px; padding: 15px; }
+      .timeline-year { font-size: 22px; }
+      .timeline-text { font-size: 16px; }
     }
   </style>
 </head>
@@ -574,38 +701,103 @@
   </div>
 
   <div class="wrap">
- <!--  <div class="card"> -->
+    <div class="card">
       
       <!-- ШАПКА С ФОТО -->
       <header>
         <div class="avatar">
-          <img id="photo" src="photos.jpg" alt="Фотография Мили Илларионовны">
+          <img id="photo" src="photo.jpg" alt="Фотография Мили Илларионовны">
         </div>
         <div class="header-text">
           <h1 id="name">Карелина Миля Илларионовна</h1>
           <div class="dates" id="dates">
-            11.12.1936 - 27.11.2013
+            11.12.1935 - 27.11.2013
             <span class="date-tooltip" id="dateTooltip">1936 - по паспорту</span>
+          </div>
+          <div class="days-counter" id="daysCounter">
+            <span class="counter-label">Прошло дней с ухода:</span>
+            <span class="days-number" id="daysCount"></span>
           </div>
         </div>
       </header>
 
       <!-- БИОГРАФИЯ -->
       <section class="bio" id="bio">
-        <p> Карелина Миля Иларионовна (урожденная Гусева) родилась 11 декабря 1935 года в городе Вологде в семье Илариона и Марии Гусевых.
+        <p>Миля Иларионовна родилась 11 декабря 1935 года в Вологде в семье Гусевых Илариона и Марии.</p>
+        <p>Вышла замуж за Карелина Льва Алексеевича. В браке родились двойняшки — Сергей и Ольга. Свою трудовую деятельность Миля Иларионовна начала продавцом, а затем продолжила в службе горгаза, где занималась проверкой газового оборудования в домах.</p>
+        <p>Выйдя на пенсию, она не смогла сидеть без дела: подрабатывала на рынке, чтобы иметь возможность помогать деньгами свекрови и внукам. Когда детям было по 20 лет, семья потеряла кормильца — Лев Алексеевич ушел из жизни. Миля Иларионовна больше замуж не выходила.</p>
+        <p>Она была настоящей хранительницей дома и очень умелой женщиной. Профессионально содержала огород — в один особенно урожайный сезон ей удалось собрать с двух небольших теплиц 100 пятилитровых ведер помидоров. Славилась своим мастерством вязания и умением печь вкуснейшие пироги. Всегда готовая прийти на помощь, она выручала близких деньгами, при этом сама умела копить.</p>
+        <p>Отличаясь мудрым отношением к жизни, она часто говорила: «Только бы не належаться, умереть быстро». За несколько месяцев до ухода она словно почувствовала свою кончину и с тревогой спрашивала родных: «Как вы без меня жить будете?». Её пожелание сбылось — она ушла быстро, из-за внезапно оторвавшегося тромба.</p>
+      </section>
 
-Семья и личная жизнь:
-Муж — Карелин Лев Алексеевич. В браке родились двойняшки: сын Сергей и дочь Ольга. Овдовела в возрасте, когда детям было по 20 лет, и больше замуж не выходила.
-
-Трудовая деятельность:
-Начала трудовой путь продавцом. В дальнейшем работала в горгазе, занимаясь проверкой газового оборудования в жилых домах. Находясь на заслуженном отдыхе, продолжала трудиться на рынке, чтобы оказывать материальную помощь свекрови и внукам.
-
-Личные качества и увлечения:
-Обладала незаурядными хозяйственными способностями. С особой любовью занималась огородом: в один из сезонов ей удалось собрать с двух небольших теплиц 100 пятилитровых ведер помидоров. Превосходно вязала и пекла пироги, которые пользовались большой любовью в семье. Отличалась практичностью и заботливостью: всегда была готова выручить деньгами, умела грамотно копить средства.
-
-Последние годы:
-Относилась к жизни философски, часто повторяя: «Только бы не належаться, умереть быстро». За несколько месяцев до смерти предчувствовала свой уход, спрашивая родственников: «Как вы без меня жить будете?». Скончалась скоропостижно от тромбоэмболии (оторвавшегося тромба).
-          Её помнят как человека с тихим голосом, мудрым взглядом и открытым сердцем.</p>
+      <!-- ХРОНОЛОГИЯ ЖИЗНИ -->
+      <section class="timeline-section">
+        <h2 class="timeline-title">Хронология жизни</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">1935</div>
+              <div class="timeline-text">Родилась 11 декабря в городе Вологда</div>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">1950-е</div>
+              <div class="timeline-text">Начала трудовую деятельность продавцом</div>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">1960-е</div>
+              <div class="timeline-text">Вышла замуж за Карелина Льва Алексеевича</div>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">1961</div>
+              <div class="timeline-text">Рождение двойняшек — Сергея и Ольги</div>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">1973-1990-е</div>
+              <div class="timeline-text">Работа в горгазе, проверка газового оборудования</div>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">1981</div>
+              <div class="timeline-text">Овдовела,детям было по 20 лет</div>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">2000-е</div>
+              <div class="timeline-text">Работа на рынке после пенсии, помощь семье</div>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">2013</div>
+              <div class="timeline-text">Ушла из жизни 27 марта</div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ВИДЕО И QR -->
@@ -624,6 +816,7 @@
         </div>
         
         <div class="qr-section">
+          <div class="qr-label">Память всегда с вами</div>
           <div class="qr-frame"> 
             <img src="https://github.com/levsergeevich324-prog/mem/raw/main/qr2.png" alt="QR-код страницы памяти">
           </div>
@@ -663,7 +856,7 @@
       <!-- ПОДВАЛ С ПАМЯТНЫМИ СЛОВАМИ -->
       <footer>
         <div class="memorial-message">
-          <p class="message-text">" Когда уходят хорошие люди, на небе зажигается новая звезда. Теперь их стало больше, а нам светлее.. "</p>
+          <p class="message-text">"Когда уходят хорошие люди, на небе зажигается новая звезда. Теперь их стало больше, а нам светлее..."</p>
         </div>
         <div class="footer-bottom">
           <span class="memorial-sign">вечная память</span>
@@ -684,8 +877,8 @@
       starsContainer.innerHTML = '';
       
       const isMobile = window.innerWidth <= 480;
-      const starCount = isMobile ? 200 : 350;
-      const bigStarCount = isMobile ? 15 : 30;
+      const starCount = isMobile ? 200 : 400;
+      const bigStarCount = isMobile ? 20 : 40;
       
       for (let i = 0; i < starCount; i++) {
         const star = document.createElement('div');
@@ -710,15 +903,15 @@
       for (let i = 0; i < bigStarCount; i++) {
         const bigStar = document.createElement('div');
         bigStar.className = 'star';
-        const size = Math.random() * 5 + 2;
+        const size = Math.random() * 6 + 3;
         bigStar.style.width = size + 'px';
         bigStar.style.height = size + 'px';
         bigStar.style.left = Math.random() * 100 + '%';
         bigStar.style.top = Math.random() * 100 + '%';
         bigStar.style.animationDelay = Math.random() * 8 + 's';
         bigStar.style.animationDuration = Math.random() * 6 + 4 + 's';
-        bigStar.style.opacity = Math.random() * 0.7 + 0.2;
-        bigStar.style.boxShadow = `0 0 ${Math.random() * 12 + 8}px rgba(200, 220, 255, 0.8)`;
+        bigStar.style.opacity = Math.random() * 0.8 + 0.2;
+        bigStar.style.boxShadow = `0 0 ${Math.random() * 15 + 10}px rgba(255, 215, 0, 0.6)`;
         starsContainer.appendChild(bigStar);
       }
     }
@@ -726,17 +919,6 @@
     // Данные
     const defaults = {
       name: "Карелина Миля Илларионовна",
-      dates: "11.12.1936 - 27.11.2013",
-      realYear: "1935",
-      bio: "<p>Миля Иларионовна родилась 11 декабря 1935 года в Вологде в семье Гусевых Илариона и Марии.
-
-Вышла замуж за Карелина Льва Алексеевича. В браке родились двойняшки — Сергей и Ольга. Свою трудовую деятельность Миля Иларионовна начала продавцом, а затем продолжила в службе горгаза, где занималась проверкой газового оборудования в домах.
-
-Выйдя на пенсию, она не смогла сидеть без дела: подрабатывала на рынке, чтобы иметь возможность помогать деньгами свекрови и внукам. Когда детям было по 20 лет, семья потеряла кормильца — Лев Алексеевич ушел из жизни. Миля Иларионовна больше замуж не выходила.
-
-Она была настоящей хранительницей дома и очень умелой женщиной. Профессионально содержала огород — в один особенно урожайный сезон ей удалось собрать с двух небольших теплиц 100 пятилитровых ведер помидоров. Славилась своим мастерством вязания и умением печь вкуснейшие пироги. Всегда готовая прийти на помощь, она выручала близких деньгами, при этом сама умела копить.
-
-Отличаясь мудрым отношением к жизни, она часто говорила: «Только бы не належаться, умереть быстро». За несколько месяцев до ухода она словно почувствовала свою кончину и с тревогой спрашивала родных: «Как вы без меня жить будете?». Её пожелание сбылось — она ушла быстро, из-за внезапно оторвавшегося тромба </p>",
       photo: "photo.jpg",
       video: "https://github.com/levsergeevich324-prog/mem/raw/main/video.mp4"
     };
@@ -763,23 +945,10 @@
     // Установка контента
     function setContent() {
       const nameEl = document.getElementById('name');
-      const datesEl = document.getElementById('dates');
-      const bioEl = document.getElementById('bio');
       const photoEl = document.getElementById('photo');
       const videoEl = document.getElementById('video');
       
       if (nameEl) nameEl.textContent = defaults.name;
-      if (bioEl) bioEl.innerHTML = defaults.bio;
-      
-      // Для даты оставляем только текст, тултип уже есть в HTML
-      if (datesEl) {
-        // Очищаем, но сохраняем тултип
-        const tooltip = document.getElementById('dateTooltip');
-        datesEl.innerHTML = `1936 - 2013`;
-        if (tooltip) {
-          datesEl.appendChild(tooltip);
-        }
-      }
       
       if (photoEl) {
         photoEl.src = defaults.photo;
@@ -795,6 +964,20 @@
       }
     }
 
+    // ===== СЧЕТЧИК ДНЕЙ =====
+    function updateDaysCounter() {
+      const daysElement = document.getElementById('daysCount');
+      if (!daysElement) return;
+      
+      const deathDate = new Date(2013, 10, 27); // 27 ноября 2013 (месяцы с 0)
+      const today = new Date();
+      
+      const diffTime = Math.abs(today - deathDate);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      
+      daysElement.textContent = diffDays.toLocaleString();
+    }
+
     // ===== ФУНКЦИОНАЛ ЗАЖЖЕНИЯ СВЕЧИ =====
     function initCandleFeature() {
       const candleButton = document.getElementById('candleButton');
@@ -803,19 +986,15 @@
       
       if (!candleButton || !candleEffect || !counterText) return;
       
-      // Загружаем сохраненное количество свечей
       let candleCount = localStorage.getItem('candleCount') ? 
                         parseInt(localStorage.getItem('candleCount')) : 0;
       
-      // Обновляем счетчик
       counterText.textContent = candleCount;
       
-      // Эффект свечи активен, если есть хотя бы одна свеча
       if (candleCount > 0) {
         candleEffect.classList.add('active');
       }
       
-      // Функция создания искорок
       function createSparks() {
         for (let i = 0; i < 5; i++) {
           setTimeout(() => {
@@ -835,34 +1014,24 @@
         }
       }
       
-      // Обработчик клика на кнопку
       candleButton.addEventListener('click', function() {
-        // Увеличиваем счетчик
         candleCount++;
         counterText.textContent = candleCount;
-        
-        // Сохраняем в localStorage
         localStorage.setItem('candleCount', candleCount);
-        
-        // Активируем эффект свечи
         candleEffect.classList.add('active');
         
-        // Анимация кнопки
         candleButton.style.transform = 'scale(0.95)';
         setTimeout(() => {
           candleButton.style.transform = 'scale(1)';
         }, 200);
         
-        // Создаем искорки
         createSparks();
         
-        // Вибрация на мобильных (если поддерживается)
         if (navigator.vibrate) {
           navigator.vibrate(50);
         }
       });
       
-      // Добавляем обработчик для сброса (по двойному клику на счетчик)
       const candleCounter = document.querySelector('.candle-counter');
       if (candleCounter) {
         candleCounter.addEventListener('dblclick', function() {
@@ -871,7 +1040,6 @@
           localStorage.setItem('candleCount', '0');
           candleEffect.classList.remove('active');
           
-          // Эффект затухания
           candleEffect.style.opacity = '0';
           setTimeout(() => {
             candleEffect.style.opacity = '';
@@ -880,49 +1048,76 @@
       }
     }
 
-    // ===== МЕРЦАНИЕ ДАТЫ (1936 ⇄ 1935) =====
+    // ===== МЕРЦАНИЕ ДАТЫ (1935 ⇄ 1936) =====
     function initDateAnimation() {
       const datesElement = document.getElementById('dates');
       const tooltip = document.getElementById('dateTooltip');
       
       if (!datesElement || !tooltip) return;
       
-      let show1935 = false;
-      const fullText = "1936 - 2013";
-      const alternativeText = "1935 - 2013";
+      // Сохраняем оригинальный текст с датами
+      const fullText = "11.12.1935 - 27.03.2013";
+      const alternativeText = "11.12.1936 - 27.03.2013";
       
-      // Меняем дату каждые 3 секунды
+      let showAlternative = false;
+      
+      // Убеждаемся, что тултип находится внутри
+      if (!datesElement.querySelector('.date-tooltip')) {
+        datesElement.appendChild(tooltip);
+      }
+      
       setInterval(function() {
         // Эффект мерцания
         datesElement.style.opacity = '0.7';
         datesElement.style.transform = 'scale(0.98)';
         
         setTimeout(() => {
-          if (show1935) {
-            // Показываем 1936
-            datesElement.innerHTML = `1936 - 2013`;
+          // Меняем текст, сохраняя тултип
+          if (showAlternative) {
+            datesElement.innerHTML = `${fullText}<span class="date-tooltip" id="dateTooltip">1936 - по паспорту</span>`;
           } else {
-            // Показываем 1935
-            datesElement.innerHTML = `1935 - 2013`;
+            datesElement.innerHTML = `${alternativeText}<span class="date-tooltip" id="dateTooltip">1935 - настоящий год рождения</span>`;
           }
-          // Возвращаем тултип
-          datesElement.appendChild(tooltip);
           
           // Возвращаем нормальный вид
           datesElement.style.opacity = '1';
           datesElement.style.transform = 'scale(1)';
           
-          show1935 = !show1935;
+          showAlternative = !showAlternative;
         }, 300);
       }, 3000);
+    }
+
+    // ===== ЗАЩИТА ОТ КОПИРОВАНИЯ =====
+    function initProtection() {
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        alert('❌ Копирование материалов сайта запрещено');
+      });
+      
+      document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && (e.key === 'u' || e.key === 'c' || e.key === 's' || e.key === 'a')) {
+          e.preventDefault();
+          alert('❌ Этот сайт защищен от копирования');
+        }
+        if (e.key === 'F12') {
+          e.preventDefault();
+          alert('❌ Инструменты разработчика отключены');
+        }
+      });
     }
 
     // ===== ЗАПУСК =====
     document.addEventListener('DOMContentLoaded', function() {
       setContent();
       createStars();
+      updateDaysCounter();
       initCandleFeature();
-      initDateAnimation(); // Запускаем анимацию даты
+      initDateAnimation();
+      initProtection();
+      
+      // Обновляем счетчик дней каждый день
+      setInterval(updateDaysCounter, 86400000); // 24 часа
     });
 
     // Обновление звезд при изменении размера окна
@@ -933,30 +1128,6 @@
         createStars();
       }, 200);
     });
-    // Защита от клика правой кнопкой мыши
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    alert('❌ Копирование материалов сайта запрещено');
-  });
-  
-  // Защита от клавиш копирования (Ctrl+C, Ctrl+U и т.д.)
-  document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && (e.key === 'u' || e.key === 'c' || e.key === 's' || e.key === 'a')) {
-      e.preventDefault();
-      alert('❌ Этот сайт защищен от копирования');
-    }
-    if (e.key === 'F12') {
-      e.preventDefault();
-      alert('❌ Инструменты разработчика отключены');
-    }
-  });
-  
-  // Дополнительная защита от открытия DevTools
-  setInterval(function() {
-    if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
-      document.body.innerHTML = '<h1>❌ Доступ запрещен</h1><p>Закройте инструменты разработчика</p>';
-    }
-  }, 1000);
   </script>
 </body>
 </html>
