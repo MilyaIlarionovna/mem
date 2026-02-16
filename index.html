@@ -17,46 +17,14 @@
       50% { opacity: 1; }
     }
 
-    /* Эффект свечи - АНИМИРОВАННОЕ ПЛАМЯ */
-    @keyframes flameFlicker {
-      0%, 100% { 
-        transform: scale(1) translateY(0);
-        opacity: 0.9;
-        box-shadow: 0 0 20px rgba(255, 150, 50, 0.8), 0 0 40px rgba(255, 100, 0, 0.4);
-      }
-      25% { 
-        transform: scale(1.1) translateY(-2px);
-        opacity: 1;
-        box-shadow: 0 0 30px rgba(255, 200, 50, 1), 0 0 60px rgba(255, 150, 0, 0.6);
-      }
-      50% { 
-        transform: scale(0.95) translateY(2px);
-        opacity: 0.8;
-        box-shadow: 0 0 15px rgba(255, 100, 0, 0.9), 0 0 30px rgba(255, 50, 0, 0.5);
-      }
-      75% { 
-        transform: scale(1.05) translateY(-1px);
-        opacity: 0.95;
-        box-shadow: 0 0 25px rgba(255, 180, 50, 1), 0 0 50px rgba(255, 120, 0, 0.5);
-      }
-    }
-
+    /* Эффект свечи (упрощенный) */
     @keyframes candleFlicker {
       0%, 100% { 
         opacity: 0.3;
         transform: scale(1);
       }
-      25% { 
-        opacity: 0.5;
-        transform: scale(1.02);
-      }
       50% { 
-        opacity: 0.8;
-        transform: scale(1.05);
-        box-shadow: 0 0 150px rgba(255, 150, 50, 0.6);
-      }
-      75% { 
-        opacity: 0.4;
+        opacity: 0.6;
         transform: scale(1.02);
       }
     }
@@ -155,7 +123,7 @@
       padding: 0;
       font-family: 'Cormorant Garamond', 'Georgia', serif;
       background: #0a0c12;
-      color: #2c1e0e;
+      color: #eaeef2;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -164,7 +132,7 @@
       line-height: 1.6;
     }
 
-    /* Звёздный фон */
+    /* Звёздный фон (виден только ДО забеливания) */
     .stars {
       position: fixed;
       top: 0;
@@ -174,6 +142,11 @@
       z-index: 0;
       pointer-events: none;
       background: radial-gradient(ellipse at bottom, #0a0c12 0%, #030405 100%);
+      transition: opacity 2s ease;
+    }
+
+    .stars.hidden {
+      opacity: 0;
     }
 
     .star {
@@ -186,7 +159,7 @@
       z-index: 1;
     }
 
-    /* Эффект свечи с АНИМИРОВАННЫМ ПЛАМЕНЕМ */
+    /* Эффект свечи (упрощенный) */
     .candle-effect {
       position: fixed;
       top: 0;
@@ -203,51 +176,6 @@
     .candle-effect.active {
       opacity: 1;
       animation: candleFlicker 3s infinite ease-in-out;
-    }
-
-    /* АНИМИРОВАННОЕ ПЛАМЯ СВЕЧИ */
-    .candle-flame {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 80px;
-      z-index: 10;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      pointer-events: none;
-      filter: drop-shadow(0 0 20px rgba(255, 100, 0, 0.8));
-    }
-
-    .candle-flame.active {
-      opacity: 1;
-    }
-
-    .candle-flame::before {
-      content: '🔥';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 70px;
-      animation: flameFlicker 0.5s infinite ease-in-out;
-      filter: drop-shadow(0 0 15px #ffaa00);
-    }
-
-    .candle-flame::after {
-      content: '';
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 20px;
-      height: 40px;
-      background: radial-gradient(circle, #ffaa00, #ff5500);
-      border-radius: 50%;
-      filter: blur(8px);
-      opacity: 0.7;
-      animation: flameFlicker 0.7s infinite ease-in-out reverse;
     }
 
     /* Забеливание */
@@ -690,6 +618,14 @@
       color: #5a3e1b;
     }
 
+    .hidden-content .qr-hint {
+      color: #5a3e1b;
+    }
+
+    .hidden-content .footer-bottom {
+      color: #5a3e1b;
+    }
+
     /* ХРОНОЛОГИЯ ЖИЗНИ */
     .timeline-section {
       margin: 50px 0 40px;
@@ -1003,62 +939,14 @@
     #bioAudio {
       display: none;
     }
-
-    /* Анимированное пламя свечи */
-    .candle-flame {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 80px;
-      z-index: 10;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      pointer-events: none;
-      filter: drop-shadow(0 0 20px rgba(255, 100, 0, 0.8));
-    }
-
-    .candle-flame.active {
-      opacity: 1;
-    }
-
-    .candle-flame::before {
-      content: '🔥';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 70px;
-      animation: flameFlicker 0.5s infinite ease-in-out;
-      filter: drop-shadow(0 0 15px #ffaa00);
-    }
-
-    .candle-flame::after {
-      content: '';
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 20px;
-      height: 40px;
-      background: radial-gradient(circle, #ffaa00, #ff5500);
-      border-radius: 50%;
-      filter: blur(8px);
-      opacity: 0.7;
-      animation: flameFlicker 0.7s infinite ease-in-out reverse;
-    }
   </style>
 </head>
 <body>
-  <!-- ЗВЁЗДНОЕ НЕБО -->
+  <!-- ЗВЁЗДНОЕ НЕБО (видно только ДО забеливания) -->
   <div class="stars" id="stars"></div>
   
-  <!-- ЭФФЕКТ СВЕЧИ -->
+  <!-- ЭФФЕКТ СВЕЧИ (упрощенный) -->
   <div class="candle-effect" id="candleEffect"></div>
-  
-  <!-- АНИМИРОВАННОЕ ПЛАМЯ СВЕЧИ -->
-  <div class="candle-flame" id="candleFlame"></div>
   
   <!-- ЗАБЕЛИВАНИЕ -->
   <div class="white-overlay" id="whiteOverlay"></div>
@@ -1408,7 +1296,6 @@
     function initCandleFeature() {
       const candleButton = document.getElementById('candleButton');
       const candleEffect = document.getElementById('candleEffect');
-      const candleFlame = document.getElementById('candleFlame');
       const whiteOverlay = document.getElementById('whiteOverlay');
       const counterText = document.getElementById('counterText');
       const headerTop = document.getElementById('headerTop');
@@ -1416,6 +1303,7 @@
       const daysCounter = document.getElementById('daysCounter');
       const videoSection = document.getElementById('videoSection');
       const hiddenContent = document.getElementById('hiddenContent');
+      const starsContainer = document.getElementById('stars');
       
       if (!candleButton || !candleEffect || !whiteOverlay || !counterText) {
         console.error('Required elements not found!');
@@ -1429,7 +1317,6 @@
       
       if (candleCount > 0) {
         candleEffect.classList.add('active');
-        candleFlame.classList.add('active');
       }
       
       function createSparks() {
@@ -1459,9 +1346,8 @@
         counterText.textContent = candleCount;
         localStorage.setItem('candleCount', candleCount);
         
-        // Эффект свечи и анимированное пламя
+        // Эффект свечи
         candleEffect.classList.add('active');
-        candleFlame.classList.add('active');
         
         // Искорки
         createSparks();
@@ -1482,12 +1368,15 @@
           whiteOverlay.classList.add('active');
         }, 3000);
         
-        // 3. Появление остального контента через 8 секунд (СТАРАЯ БУМАГА вместо звезд)
+        // 3. Появление остального контента через 8 секунд
+        // Звёзды исчезают, появляется старая бумага
         setTimeout(() => {
           console.log('Showing hidden content');
           whiteOverlay.classList.remove('active');
           candleEffect.classList.remove('active');
-          candleFlame.classList.remove('active');
+          
+          // Звёзды исчезают
+          starsContainer.classList.add('hidden');
           
           // Показываем скрытый контент (видео НЕ появляется)
           hiddenContent.classList.add('visible');
@@ -1511,7 +1400,6 @@
         counterText.textContent = '0';
         localStorage.setItem('candleCount', '0');
         candleEffect.classList.remove('active');
-        candleFlame.classList.remove('active');
       });
     }
 
