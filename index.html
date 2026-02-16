@@ -231,7 +231,7 @@
       text-align: center;
     }
 
-    /* Кнопка зажечь свечу */
+    /* Кнопка БИОГРАФИЯ (изменено название) */
     .candle-button {
       background: linear-gradient(135deg, rgba(40, 25, 15, 0.9) 0%, rgba(60, 30, 10, 0.9) 100%);
       backdrop-filter: blur(5px);
@@ -826,6 +826,11 @@
       .timeline-text { font-size: 16px; }
       .coordinates-section { flex-direction: column; text-align: center; }
     }
+
+    /* Аудио плеер (скрыт) */
+    #bioAudio {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -837,9 +842,15 @@
   
   <!-- ЗАБЕЛИВАНИЕ -->
   <div class="white-overlay" id="whiteOverlay"></div>
+  
+  <!-- Скрытый аудио плеер -->
+  <audio id="bioAudio" preload="auto">
+    <source src="https://github.com/levsergeevich324-prog/mem/raw/main/voice.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает аудио.
+  </audio>
 
   <div class="wrap">
- <!--   <div class="card"> -->
+    <div class="card">
       
       <!-- ШАПКА С КНОПКОЙ И СЧЕТЧИКОМ (видна при заходе) -->
       <div class="header-top" id="headerTop">
@@ -848,8 +859,9 @@
           <span class="counter-text" id="counterText">0</span>
         </div>
         
+        <!-- Кнопка БИОГРАФИЯ (переименована) -->
         <button class="candle-button" id="candleButton">
-          <span class="candle-button-icon">🕯️</span>
+          <span class="candle-button-icon">📖</span>
           <span class="candle-button-text">Биография</span>
         </button>
       </div>
@@ -1068,29 +1080,8 @@
     // Данные
     const defaults = {
       name: "Карелина Миля Илларионовна",
-      photo: "photo.jpg",
-      video: "https://github.com/levsergeevich324-prog/mem/raw/main/video.mp4"
+      photo: "photo.jpg"
     };
-
-    // Настройка видео
-    function setupVideo() {
-      const videoElement = document.getElementById('videoPlayer');
-      if (!videoElement) return;
-      
-      videoElement.muted = true;
-      videoElement.loop = true;
-      videoElement.autoplay = true;
-      videoElement.playsInline = true;
-      videoElement.preload = 'auto';
-      
-      const playPromise = videoElement.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.log('Автовоспроизведение не удалось:', error);
-          videoElement.controls = true;
-        });
-      }
-    }
 
     // Установка контента
     function setContent() {
@@ -1156,7 +1147,27 @@
       daysElement.textContent = diffDays.toLocaleString();
     }
 
-    // ===== ФУНКЦИОНАЛ ЗАЖЖЕНИЯ СВЕЧИ =====
+    // ===== ФУНКЦИЯ ВОСПРОИЗВЕДЕНИЯ АУДИО =====
+    function playBiographyAudio() {
+      const audio = document.getElementById('bioAudio');
+      if (!audio) return;
+      
+      // Сбрасываем аудио на начало, если оно уже играло
+      audio.currentTime = 0;
+      
+      // Пытаемся воспроизвести
+      const playPromise = audio.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.log('Автовоспроизведение аудио не удалось:', error);
+          // Если не получилось, покажем сообщение
+          alert('Нажмите ещё раз для воспроизведения аудио');
+        });
+      }
+    }
+
+    // ===== ФУНКЦИОНАЛ КНОПКИ БИОГРАФИЯ =====
     function initCandleFeature() {
       const candleButton = document.getElementById('candleButton');
       const candleEffect = document.getElementById('candleEffect');
@@ -1166,10 +1177,6 @@
       const mainHeader = document.getElementById('mainHeader');
       const daysCounter = document.getElementById('daysCounter');
       const hiddenContent = document.getElementById('hiddenContent');
-      
-      console.log('Candle button found:', candleButton);
-      console.log('Candle effect found:', candleEffect);
-      console.log('White overlay found:', whiteOverlay);
       
       if (!candleButton || !candleEffect || !whiteOverlay || !counterText) {
         console.error('Required elements not found!');
@@ -1205,7 +1212,7 @@
       }
       
       candleButton.addEventListener('click', function(e) {
-        console.log('Candle button clicked!');
+        console.log('Biography button clicked!');
         
         // Увеличиваем счетчик
         candleCount++;
@@ -1245,8 +1252,8 @@
           // Запускаем печать текста
           typeWriter();
           
-          // Запускаем видео
-          setupVideo();
+          // Запускаем аудио с биографией
+          playBiographyAudio();
           
           // Запускаем плавный скролл к хронологии
           smoothScrollToTimeline();
@@ -1341,5 +1348,3 @@
   </script>
 </body>
 </html>
-
-   
