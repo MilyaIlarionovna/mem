@@ -314,20 +314,6 @@
       padding: 0;
     }
 
-    /* card закомментирован */
-    /* .card {
-      background: rgba(10, 14, 19, 0.8);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      border-radius: 28px;
-      padding: 40px 35px;
-      border: 1px solid rgba(210, 220, 235, 0.15);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-      position: relative;
-      z-index: 25;
-      width: 100%;
-    } */
-
     /* ШАПКА С ФОТО (видна при заходе) */
     .main-header {
       display: flex;
@@ -453,9 +439,16 @@
       margin: 0 5px;
     }
 
-    /* ВИДЕО НА НАЧАЛЬНОЙ СТРАНИЦЕ */
+    /* ВИДЕО НА НАЧАЛЬНОЙ СТРАНИЦЕ (видно сразу) */
     .video-section {
       margin: 40px 0;
+      transition: opacity 2s ease, visibility 2s ease;
+    }
+
+    .video-section.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
 
     .video-wrapper {
@@ -813,7 +806,6 @@
     }
 
     @media screen and (max-width: 480px) {
-      /* .card { padding: 20px 15px; } */
       .main-header { flex-direction: column; text-align: center; }
       .avatar { width: 130px; height: 130px; flex: 0 0 130px; }
       .candle-button { padding: 10px 20px; }
@@ -848,8 +840,6 @@
   </audio>
 
   <div class="wrap">
-    <!-- card закомментирован -->
-    <!-- <div class="card"> -->
       
       <!-- ШАПКА С КНОПКОЙ И СЧЕТЧИКОМ (видна при заходе) -->
       <div class="header-top" id="headerTop">
@@ -884,7 +874,7 @@
       </header>
 
       <!-- ВИДЕО НА НАЧАЛЬНОЙ СТРАНИЦЕ (видно сразу) -->
-      <section class="video-section">
+      <section class="video-section" id="videoSection">
         <div class="video-wrapper">
           <video id="videoPlayer" 
                  controls 
@@ -1024,7 +1014,6 @@
         
       </div>
 
-    <!-- </div>  card закомментирован -->
   </div>
 
   <script>
@@ -1194,6 +1183,7 @@
       const headerTop = document.getElementById('headerTop');
       const mainHeader = document.getElementById('mainHeader');
       const daysCounter = document.getElementById('daysCounter');
+      const videoSection = document.getElementById('videoSection');
       const hiddenContent = document.getElementById('hiddenContent');
       
       if (!candleButton || !candleEffect || !whiteOverlay || !counterText) {
@@ -1247,10 +1237,11 @@
           navigator.vibrate(50);
         }
         
-        // 1. Всё исчезает (кроме звезд)
+        // 1. Всё исчезает (кроме звезд), включая видео
         headerTop.classList.add('hidden');
         mainHeader.classList.add('hidden');
         daysCounter.classList.add('hidden');
+        videoSection.classList.add('hidden'); // Видео тоже исчезает
         
         // 2. Забеливание начинается через 3 секунды
         setTimeout(() => {
@@ -1264,7 +1255,7 @@
           whiteOverlay.classList.remove('active');
           candleEffect.classList.remove('active');
           
-          // Показываем скрытый контент
+          // Показываем скрытый контент (видео НЕ появляется)
           hiddenContent.classList.add('visible');
           
           // Запускаем печать текста
