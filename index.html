@@ -1039,13 +1039,24 @@
       text-transform: uppercase;
     }
 
-    /* Стили для видео в хронологии */
+    /* Стили для видео в хронологии - УБРАНА ЖЁЛТАЯ РАМКА */
     .timeline-video {
       width: 100%;
       max-height: 200px;
       border-radius: 10px;
       margin-top: 15px;
-      border: 2px solid #d4af37;
+      border: none; /* Убрана рамка */
+      outline: none; /* Убрано обводка */
+    }
+
+    /* Убираем стандартные элементы управления видео (оставляем только play/pause) */
+    .timeline-video::-webkit-media-controls {
+      opacity: 0.5;
+    }
+
+    .timeline-video::-webkit-media-controls-enclosure {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 0 0 10px 10px;
     }
 
     /* АДАПТАЦИЯ */
@@ -1165,8 +1176,8 @@
                 <div class="timeline-content">
                   <div class="timeline-year">1935</div>
                   <div class="timeline-text">Родилась 11 декабря в городе Вологда (на фото примерно 13 лет. Рядом стоит сестра Лина, на руках брат Валентин)</div>
-                  <!-- короткое видео -->
-                  <video class="timeline-video" controls loop>
+                  <!-- короткое видео с автоматическим воспроизведением и без рамки -->
+                  <video class="timeline-video" autoplay muted loop playsinline>
                     <source src="13let.mp4" type="video/mp4">
                   </video>
                 </div>
@@ -1183,8 +1194,8 @@
                 <div class="timeline-content">
                   <div class="timeline-year">1960-е</div>
                   <div class="timeline-text">Вышла замуж за Карелина Льва Алексеевича</div>
-                  <!-- короткое видео -->
-                  <video class="timeline-video" controls loop>
+                  <!-- короткое видео с автоматическим воспроизведением и без рамки -->
+                  <video class="timeline-video" autoplay muted loop playsinline>
                     <source src="MilyasMuzhem.mp4" type="video/mp4">
                   </video>
                 </div>
@@ -1361,6 +1372,14 @@
       }
     }
 
+    // Функция для запуска всех видео в хронологии
+    function playTimelineVideos() {
+      const videos = document.querySelectorAll('.timeline-video');
+      videos.forEach(video => {
+        video.play().catch(e => console.log('Video play failed:', e));
+      });
+    }
+
     // Функция для скролла к хронологии
     function scrollToTimeline() {
       const timelineSection = document.getElementById('timeline');
@@ -1443,6 +1462,11 @@
           typeWriter();
           playBiographyAudio();
           initSoundControl();
+          
+          // Запускаем видео в хронологии
+          setTimeout(() => {
+            playTimelineVideos();
+          }, 1000);
           
           // Скроллим к хронологии через небольшую задержку
           setTimeout(() => {
